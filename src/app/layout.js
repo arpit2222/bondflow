@@ -1,16 +1,17 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import { Web3Provider } from "@/providers/web3-provider";
-import Navbar from "@/components/navbar";
+import ClientLayout from "./client-layout";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
+  display: 'swap',
 });
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
+  display: 'swap',
 });
 
 export const metadata = {
@@ -22,12 +23,9 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen bg-background`}>
-        <Web3Provider>
-          <div className="flex min-h-screen flex-col">
-            <Navbar />
-            <main className="flex-1">{children}</main>
-          </div>
-        </Web3Provider>
+        <ClientLayout>
+          {children}
+        </ClientLayout>
       </body>
     </html>
   );
