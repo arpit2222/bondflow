@@ -6,10 +6,15 @@ import { mainnet, sepolia } from 'wagmi/chains';
 import { getDefaultConfig, RainbowKitProvider } from '@rainbow-me/rainbowkit';
 import '@rainbow-me/rainbowkit/styles.css';
 
+// Check for required environment variables
+if (!process.env.NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID) {
+  console.warn('NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID is not set. Some features may not work correctly.');
+}
+
 // Set up chains
 export const config = getDefaultConfig({
   appName: 'BondFlow',
-  projectId: process.env.NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID || 'default-project-id',
+  projectId: process.env.NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID || '00000000000000000000000000000000', // Fallback to a dummy project ID
   chains: [mainnet, sepolia],
   ssr: true
 });
